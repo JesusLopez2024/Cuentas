@@ -1,0 +1,84 @@
+﻿@model Cuentas.Models.Cuenta
+
+@{
+    ViewData["Title"] = "Editar Cuenta";
+}
+
+<div class="container cuentas-container">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                <i class="bi bi-pencil-square me-2" style="color:#f59e0b;"></i> Editar cuenta
+            </h1>
+            <div class="page-sub">
+                Solo se pueden modificar los datos generales.
+                Los movimientos actualizan el balance automáticamente.
+            </div>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+                <!-- Número -->
+                <div class="col-md-6">
+                    <label asp-for="numero" class="form-label">Número</label>
+                    <input asp-for="numero" class="form-control" />
+                    <span asp-validation-for="numero" class="text-danger"></span>
+                </div>
+
+                <!-- Descripción -->
+                <div class="col-md-6">
+                    <label asp-for="descripcion" class="form-label">Descripción</label>
+                    <input asp-for="descripcion" class="form-control" />
+                    <span asp-validation-for="descripcion" class="text-danger"></span>
+                </div>
+
+                <!-- Créditos (solo lectura) -->
+                <div class="col-md-4">
+                    <label class="form-label">Créditos</label>
+                    <input value="@Model.creditos" class="form-control" readonly />
+                </div>
+
+                <!-- Débitos (solo lectura) -->
+                <div class="col-md-4">
+                    <label class="form-label">Débitos</label>
+                    <input value="@Model.debitos" class="form-control" readonly />
+                </div>
+
+                <!-- Balance (solo lectura) -->
+                <div class="col-md-4">
+                    <label class="form-label">Balance</label>
+                    <input value="@Model.balance" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                @if (Model.balance >= 0)
+                {
+                    <button type="submit" class="btn btn-edit">
+                        <i class="bi bi-save"></i> Guardar cambios
+                    </button>
+                }
+
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

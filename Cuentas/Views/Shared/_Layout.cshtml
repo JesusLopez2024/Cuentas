@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cuentas</title>
+
+    <!-- Bootstrap (local) -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Bootstrap Icons (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Site styles -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Cuentas.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark elegant-green shadow-sm mb-4">
+            <div class="container">
+
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Cuenta" asp-action="Index">
+                    <i class="bi bi-journal-bookmark-fill me-2"></i>
+                    <strong>Cuentas</strong>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="mainNav" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+
+                        <!-- Cuentas -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Cuenta" asp-action="Index">
+                                <i class="bi bi-journal-bookmark-fill me-1"></i>
+                                Cuentas
+                            </a>
+                        </li>
+
+                        <!-- Movimientos -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Movimiento" asp-action="Index">
+                                <i class="bi bi-arrow-left-right me-1"></i>
+                                Movimientos
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <footer class="border-top footer text-muted py-3">
+        <div class="container text-center">
+            &copy; 2025 - Cuentas
+        </div>
+    </footer>
+
+    <!-- jQuery (if your project uses the local lib) -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap bundle (local) -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Site script -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Initialize tooltips (works for bootstrap 4 and 5 attributes) -->
+    <script>
+        (function () {
+            // Bootstrap 5 uses 'data-bs-toggle'; Bootstrap 4 uses 'data-toggle'
+            // Try initializing both (if the bootstrap bundle provides Tooltip)
+            try {
+                // if bootstrap (v5) is present
+                if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+                    var triggers = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"], [data-toggle="tooltip"]'));
+                    triggers.forEach(function (el) {
+                        new bootstrap.Tooltip(el);
+                    });
+                }
+                // fallback for older bootstrap/jQuery tooltip init (if using bootstrap 4)
+                else if (typeof $ !== 'undefined' && $.fn && $.fn.tooltip) {
+                    $('[data-toggle="tooltip"]').tooltip();
+                }
+            } catch (e) {
+                // silent
+                console && console.log(e);
+            }
+        })();
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

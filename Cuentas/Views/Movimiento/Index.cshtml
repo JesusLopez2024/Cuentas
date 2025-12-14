@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Cuentas.Models.Movimiento>
+
+<div class="container cuentas-container">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Movimientos</h1>
+            <div class="page-sub">Listado de movimientos</div>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Create" class="btn btn-create-green">
+                <i class="bi bi-plus-lg"></i> Nuevo movimiento
+            </a>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <table class="table table-modern">
+            <thead>
+                <tr>
+                    <th>Cuenta</th>
+                    <th>Tipo</th>
+                    <th class="text-end">Monto</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Cuenta.numero</td>
+                        <td>@(item.Tipo == 1 ? "Depósito" : "Retiro")</td>
+                        <td class="text-end">@item.Monto</td>
+                        <td>@item.Fecha.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model Cuentas.Models.Cuenta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container cuentas-container">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title"><i class="bi bi-plus-circle-fill me-2" style="color:#0ea5a4;"></i> Crear cuenta</h1>
+            <div class="page-sub">Agrega una nueva cuenta — el balance se calcula automáticamente</div>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="numero" class="form-label">Número</label>
+                    <input asp-for="numero" class="form-control" />
+                    <span asp-validation-for="numero" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="descripcion" class="form-label">Descripción</label>
+                    <input asp-for="descripcion" class="form-control" />
+                    <span asp-validation-for="descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="creditos" class="form-label">Créditos</label>
+                    <input asp-for="creditos" class="form-control" />
+                    <span asp-validation-for="creditos" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="debitos" class="form-label">Débitos</label>
+                    <input asp-for="debitos" class="form-control" />
+                    <span asp-validation-for="debitos" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- balance se calcula en controller; lo dejamos hidden -->
+            <input asp-for="balance" type="hidden" value="0" />
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-create-green">
+                    <i class="bi bi-check-circle-fill"></i> Guardar
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

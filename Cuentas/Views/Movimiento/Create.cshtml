@@ -1,0 +1,70 @@
+﻿@model Cuentas.Models.Movimiento
+
+<div class="container cuentas-container">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Nuevo Movimiento</h1>
+            <div class="page-sub">Depósitos y retiros</div>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+
+                <!-- CUENTA -->
+                <div class="col-md-6">
+                    <label asp-for="CuentaId" class="form-label">Cuenta</label>
+                    <select asp-for="CuentaId"
+                            class="form-select"
+                            asp-items="ViewBag.Cuentas">
+                        <option value="">Seleccione una cuenta</option>
+                    </select>
+                    <span asp-validation-for="CuentaId" class="text-danger"></span>
+                </div>
+
+                <!-- TIPO -->
+                <div class="col-md-6">
+                    <label asp-for="Tipo" class="form-label">Tipo</label>
+                    <select asp-for="Tipo" class="form-select">
+                        <option value="">Seleccione</option>
+                        <option value="1">Depósito</option>
+                        <option value="2">Retiro</option>
+                    </select>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+
+                <!-- MONTO -->
+                <div class="col-md-6">
+                    <label asp-for="Monto" class="form-label">Monto</label>
+                    <input asp-for="Monto" class="form-control" />
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-create-green">
+                    <i class="bi bi-save"></i> Guardar
+                </button>
+
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Cuentas.Models.Cuenta>
+
+<div class="container cuentas-container">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Cuentas</h1>
+            <div class="page-sub">Ejercicio de clase</div>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Create" class="btn btn-create-green">
+                <i class="bi bi-plus-lg"></i> Create
+            </a>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <div class="table-responsive">
+            <table class="table table-modern">
+                <thead>
+                    <tr>
+                        <th>Numero</th>
+                        <th>Descripcion</th>
+                        <th class="text-end">Creditos</th>
+                        <th class="text-end">Debitos</th>
+                        <th class="text-end">Balance</th>
+                        <th>Estado</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.numero</td>
+                            <td>@item.descripcion</td>
+                            <td class="text-end">@item.creditos</td>
+                            <td class="text-end">@item.debitos</td>
+                            <td class="text-end">@item.balance</td>
+                            <td>@(item.balance < 0 ? "Inactivo" : "Activo")</td>
+                            <td class="action-buttons">
+                                <a asp-action="Edit" asp-route-id="@item.Id"
+                                   class="btn-icon btn-edit small">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+
+                                <a asp-action="Details" asp-route-id="@item.Id"
+                                   class="btn-icon btn-details small">
+                                    <i class="bi bi-search"></i> Details
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.Id"
+                                   class="btn-icon btn-delete small">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    
